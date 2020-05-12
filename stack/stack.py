@@ -1,6 +1,6 @@
-import sys
-sys.path.append('./linked_list')
-from linked_list import Node, LinkedList
+# import sys
+# sys.path.append('./linked_list')
+from singly_linked_list import LinkedList
 
 """
 A stack is a data structure whose primary purpose is to store and
@@ -35,13 +35,11 @@ class Stack:
         self.storage = LinkedList()
 
     def __len__(self):
-        return self.size
+        return len(self.storage)
 
     def push(self, value):
-        self.storage.add_to_end(value)
-        self.size += 1
+        self.storage.add_to_tail(value)
 
     def pop(self):
-        if self.size:
-            self.size -= 1
+        if len(self.storage) > 0:
             return self.storage.remove_from_end()
