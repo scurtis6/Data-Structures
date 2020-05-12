@@ -70,3 +70,18 @@ class LinkedList:
         # what if the list is empty?
         else:
             return None
+
+    def remove_from_head(self):
+        # what if the list is empty?
+        if not self.head:
+            return None
+        # what if it isn't empty?
+        else:
+            # we want to return the value at the current head
+            value = self.head.get_value()
+            # remove the value at the head
+            # update self.head
+            self.head = self.head.get_next()
+            # line 35, in test_dequeue_respects_order   self.assertEqual(len(self.q), 2)    AssertionError: 3 != 2
+            self.length -= 1
+            return value
