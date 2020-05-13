@@ -17,10 +17,24 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # compare value against self
+        if value < self.value:
+            # if empty
+            if not self.left:
+                # set left to node value
+                self.left = BSTNode(value)
+            else:
+                # insert value to the left
+                self.left.insert(value)
+        else:
+            # if empty
+            if not self.right:
+                # set right to node value
+                self.right = BSTNode(value)
+            else:
+                # insert value to the right
+                self.right.insert(value)
 
-    # Return True if the tree contains the value
-    # False if it does not
     def contains(self, target):
         pass
 
