@@ -35,7 +35,7 @@ class LinkedList:
             self.tail = new_node
             # self.assertEqual(len(self.stack), 1)   AssertionError: 0 != 1
             # self.assertEqual(len(self.stack), 2)   AssertionError: 1 != 2
-            self.length += 1
+            # self.length += 1
         # what if the list isn't empty?
         else:
             # what node do we want to add the new node to?
@@ -44,29 +44,62 @@ class LinkedList:
             # we're at the end of the linked list
             self.tail.next_node = new_node
             self.tail = new_node
-            self.length += 1
-
-    def remove_from_end(self):
-        current = self.head
-        # what if it isn't empty?
-        # AssertionError: None != 105 error fixed
-        if self.length > 0:
-            previous = None
-            while current.next_node != None:
-                previous = current
-                current = current.get_next()
-            # what if it isn't empty?
-            if previous != None:
-                previous.set_next(None)
-                self.tail = previous
-                self.length -= 1
-                return current.value
-            # what if the list is empty?
-            else:
-                self.head = None
-                self.tail = None
-                self.length = 0
-                return current.value
+    
+    def remove_tail(self):
         # what if the list is empty?
-        else:
+        if not self.tail and not self.head:
             return None
+        # what if it isn't empty?
+        else:
+            # we want to return the value at the current tail
+            value = self.tail.get_value()
+            # remove the value at the tail
+            # update self.tail
+            self.tail = self.tail.get_next()
+            self.head = self.head.get_next()
+            return value
+
+    def add_to_head(self, value):
+        new_node = Node(value)
+        # what if the list is empty?
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.set_next(self.head)
+            self.head = new_node
+
+    def remove_head(self):
+        # current = self.head
+        # what if the list is empty?
+        if not self.head:
+            return None
+        # what if it isn't empty?
+        else:
+            # we want to return the value at the current head
+            value = self.head.get_value()
+            # remove the value at the head
+            # update self.head
+            self.head = self.head.get_next()
+            return value
+
+    def contains(self):
+        pass
+
+    def get_max(self):
+        # if empty
+        if self.head is None and self.tail is None:
+            return None
+        # create current
+        current_node = self.head
+        # set current to equal (something)
+        current_max = self.head.value
+        # loop through node
+        while current_node is not None:
+            # if current value is greater than (something)
+            if current_node.value > current_max:
+                # set current max to (something)
+                current_max = current_node.value
+            current_node = current_node.get_next()
+        # then return that value
+        return current_max
