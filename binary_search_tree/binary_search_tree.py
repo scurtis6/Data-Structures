@@ -1,3 +1,5 @@
+from collections import deque
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -85,18 +87,28 @@ class BSTNode:
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
         # if left (low)
-        if self.left:
-            self.left.in_order_print(node)
+        if node.left:
+            self.left.in_order_print(node.left)
         print(node.value)
         # if right (high)
-        if self.right:
-            self.right.in_order_print(node)
-        print(node.value)
+        if node.right:
+            self.right.in_order_print(node.right)
+        # print(f'value: {node.value}')
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        queue = deque()
+        # add the root node
+        queue.append(self)
+        # loop as long as the queue still has elements
+        while len(queue) > 0:
+            current = queue.popleft()
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            print(current.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
